@@ -9,7 +9,7 @@ class BaseModel:
     """Represents the BaseModel of the HBnB project."""
 
     def __init__(self, *args, **kwargs):
-        
+
         tform = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for k, v in kwargs.items():
