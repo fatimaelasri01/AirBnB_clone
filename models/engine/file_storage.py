@@ -37,14 +37,12 @@ class FileStorage:
             with open(FileStorage.__file_path) as f:
                 objdict = json.load(f)
                 for o in objdict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    if '.' in cls_name:
+                    cls_name = o.get("__class__", None)
+                    if cls_name and '.' in cls_name:
                         module_name, class_name = cls_name.split('.')
-                        cls = getattr(__import__(f"models.{module_name}",
-                        fromlist=[class_name]), class_name)
+                        module = getattr(models, module_name)
+                        cls = getattr(module, class_name)
+                        del o["__class__"]
                         self.new(cls(**o))
-                    else:
-                        print("Invalid class name format:", cls_name)
         except FileNotFoundError:
             return
