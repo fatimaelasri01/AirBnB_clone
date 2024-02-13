@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """This module defines the BaseModel class."""
-import models
 from datetime import datetime
 from uuid import uuid4
 
@@ -14,19 +13,23 @@ class BaseModel:
         if kwargs:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
-                    setattr(self, k, datetime.strptime(v, tform))
+                    try:
+                        setattr(self, k, datetime.strptime(v, tform))
+                    except ValueError:
+                        pass
                 else:
                     setattr(self, k, v)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
-            models.storage.new(self)
+            storage.new(self)
 
     def save(self):
         """Update the 'updated_at' with the current datetime."""
         self.updated_at = datetime.today()
-        models.storage.save()
+        from models import storage
+        storage.save()
 
     def to_dict(self):
         """Return the dictionary of the BaseModel instance.
