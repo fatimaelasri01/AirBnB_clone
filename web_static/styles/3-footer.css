@@ -3,10 +3,9 @@ footer {
 	height: 60px;
 	width: 100%;
 	border-top: 1px solid #CCCCCC;
-}
-footer span {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	bottom: 0;
+	position: absolute;
 }
