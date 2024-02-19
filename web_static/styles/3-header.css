@@ -5,7 +5,7 @@ header {
 	border-bottom: solid 1px #CCCCCC;
 }
 .logo {
-	background-image: url(../images/logo.png);
+	background-image: url(/images/logo.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 	height: 100%;
